@@ -19,8 +19,13 @@ struct ContentView: View {
             Text(messageString)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
+                .minimumScaleFactor(0.5)
+                .multilineTextAlignment(.center)
                 .foregroundColor(.red)
                 .padding()
+                .border(.orange, width: 1)
+                .frame(height: 150)
+                .frame(maxWidth: .infinity)
             HStack {
                 Button("Awesome") {
                     // This is the action performed when the button is pressed
