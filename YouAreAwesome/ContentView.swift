@@ -13,13 +13,6 @@ struct ContentView: View {
         
         
         VStack {
-            Image(systemName: "swift")
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(Color("Gold-BC"))
-                .padding(.all)
-                .background(Color("Maroon-BC"))
-                .cornerRadius(15)
             
             Spacer()
             
@@ -41,6 +34,7 @@ struct ContentView: View {
                     messageString = "You Are Awesome!"
                 }
                 .buttonStyle(.borderedProminent)
+                .padding()
                 
                 Spacer()
                 
@@ -49,6 +43,7 @@ struct ContentView: View {
                     messageString = "You Are Great!"
                 }
                 .buttonStyle(.borderedProminent)
+                .padding()
             }
         }
     }
