@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var messageString = ""
     @State private var imageName = ""
+    @State private var imageNumber = 0
     
     var body: some View {
         
@@ -38,17 +39,12 @@ struct ContentView: View {
             Button("Show Message") {
                 let message1 = "You Are Awesome!"
                 let message2 = "You Are Great!"
-                let imageFirst = "image0"
-                let imageSecond = "image1"
                 
-                // This is the action performed when the button is pressed
-//                if messageString == message1 {
-//                    messageString = message2
-//                } else {
-//                    messageString = message1
-//                }
                 messageString = (messageString == message1 ? message2 : message1)
-                imageName = (imageName == imageFirst ? imageSecond : imageFirst)
+
+                imageName = "image\(imageNumber)"
+                imageNumber = (imageNumber == 9 ? 0 : (imageNumber + 1))
+                
             }
             .buttonStyle(.borderedProminent)
             .padding()
