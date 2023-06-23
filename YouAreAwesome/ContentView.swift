@@ -33,11 +33,12 @@ struct ContentView: View {
                 let message2 = "You Are Great!"
                 
                 // This is the action performed when the button is pressed
-                if messageString == message1 {
-                    messageString = message2
-                } else {
-                    messageString = message1
-                }
+//                if messageString == message1 {
+//                    messageString = message2
+//                } else {
+//                    messageString = message1
+//                }
+                messageString = (messageString == message1 ? message2 : message1)
             }
             .buttonStyle(.borderedProminent)
             .padding()
