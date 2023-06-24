@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var messageString = ""
     @State private var imageName = ""
     @State private var imageNumber = 0
+    @State private var indexNumber = 0
     
     var body: some View {
         
@@ -37,11 +38,17 @@ struct ContentView: View {
             Spacer()
             
             Button("Show Message") {
-                let message1 = "You Are Awesome!"
-                let message2 = "You Are Great!"
-                
-                messageString = (messageString == message1 ? message2 : message1)
+                let messageArray: [String] = ["You Are Awesome!",
+                                              "You Are Great!",
+                                              "You Are Fantastic!",
+                                              "You Make Me Smile!",
+                                              "When the Genius Bar Needs Help, They Call You!",
+                                              "Fabulous? That's You!",
+                                              "You Are a Coding Star!"]
 
+                messageString = messageArray[indexNumber]
+                indexNumber = (indexNumber < (messageArray.count - 1) ? indexNumber + 1 : 0)
+                
                 imageName = "image\(imageNumber)"
                 imageNumber = (imageNumber == 9 ? 0 : (imageNumber + 1))
                 
@@ -51,8 +58,9 @@ struct ContentView: View {
             
         }
     }
-    
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
