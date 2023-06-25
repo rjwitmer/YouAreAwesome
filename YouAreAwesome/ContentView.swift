@@ -10,20 +10,12 @@ import SwiftUI
 struct ContentView: View {
     @State private var messageString = ""
     @State private var imageName = ""
-    @State private var imageNumber = 0
-    @State private var indexNumber = 0
+    @State private var imageNumber = -1
+    @State private var indexNumber = -1
     
     var body: some View {
         
         VStack {
-            
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(30)
-                .padding()
-            
-            Spacer()
             
             Text(messageString)
                 .font(.largeTitle)
@@ -35,6 +27,12 @@ struct ContentView: View {
                 .frame(height: 150)
                 .frame(maxWidth: .infinity)
             
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .cornerRadius(30)
+                .padding()
+            
             Spacer()
             
             Button("Show Message") {
@@ -45,9 +43,22 @@ struct ContentView: View {
                                               "When the Genius Bar Needs Help, They Call You!",
                                               "Fabulous? That's You!",
                                               "You Are a Coding Star!"]
+                
+                // Make sure that the random messages and images are not repeated by using repeat...while loops
+                
+                let lastMessageNumber = indexNumber
+                let lastImageNumber = imageNumber
 
-                messageString = messageArray[Int.random(in: 0...(messageArray.count - 1))]
-                imageName = "image\(Int.random(in: 0...9))"
+                repeat {
+                    indexNumber = Int.random(in: 0...(messageArray.count - 1))
+                } while indexNumber == lastMessageNumber
+                
+                repeat {
+                    imageNumber = Int.random(in: 0...9)
+                } while imageNumber == lastImageNumber
+                
+                messageString = messageArray[indexNumber]
+                imageName = "image\(imageNumber)"
                 
             }
             .buttonStyle(.borderedProminent)
