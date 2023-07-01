@@ -9,6 +9,7 @@ import SwiftUI
 import AVFAudio
 
 struct ContentView: View {
+    @State private var soundIsOn = true
     @State private var messageString = ""
     @State private var imageName = ""
     @State private var imageNumber = -1
@@ -39,28 +40,44 @@ struct ContentView: View {
             
             Spacer()
             
-            Button("Show Message") {
-                let messageArray: [String] = ["You Are Awesome!",
-                                              "You Are Great!",
-                                              "You Are Fantastic!",
-                                              "You Make Me Smile!",
-                                              "When the Genius Bar Needs Help, They Call You!",
-                                              "Fabulous? That's You!",
-                                              "You Are a Coding Star!"]
+            HStack {
                 
-              
-                messageNumber = nonRepeatingRandom(lastNumber: messageNumber, upperBound: messageArray.count - 1)
-                messageString = messageArray[messageNumber]
+                Text("Sound: \(soundIsOn ? "On" : "Off")")
+                Toggle("", isOn: $soundIsOn)
+                    .labelsHidden()
+                    .onChange(of: soundIsOn) { _ in
+                        if audioPlayer != nil && audioPlayer.isPlaying {
+                            audioPlayer.stop()
+                        }
+                        
+                    }
                 
-                imageNumber = nonRepeatingRandom(lastNumber: imageNumber, upperBound: 9)
-                imageName = "image\(imageNumber)"
+                Spacer()
                 
-                soundNumber = nonRepeatingRandom(lastNumber: soundNumber, upperBound: 5)
-                playSound(soundName: "sound\(soundNumber)")
-                
+                Button("Show Message") {
+                    let messageArray: [String] = ["You Are Awesome!",
+                                                  "You Are Great!",
+                                                  "You Are Fantastic!",
+                                                  "You Make Me Smile!",
+                                                  "When the Genius Bar Needs Help, They Call You!",
+                                                  "Fabulous? That's You!",
+                                                  "You Are a Coding Star!"]
+                    
+                    
+                    messageNumber = nonRepeatingRandom(lastNumber: messageNumber, upperBound: messageArray.count - 1)
+                    messageString = messageArray[messageNumber]
+                    
+                    imageNumber = nonRepeatingRandom(lastNumber: imageNumber, upperBound: 9)
+                    imageName = "image\(imageNumber)"
+                    
+                    soundNumber = nonRepeatingRandom(lastNumber: soundNumber, upperBound: 5)
+                    if soundIsOn {
+                        playSound(soundName: "sound\(soundNumber)")
+                    }
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
-            
+            .padding()
         }
         .padding()
     }
