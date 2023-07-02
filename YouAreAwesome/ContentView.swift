@@ -31,12 +31,14 @@ struct ContentView: View {
                 .padding()
                 .frame(height: 150)
                 .frame(maxWidth: .infinity)
+                .animation(.easeInOut(duration: 0.15), value: messageString)
             
             Image(imageName)
                 .resizable()
                 .scaledToFit()
                 .cornerRadius(30)
                 .padding()
+                .animation(.default, value: messageString)
             
             Spacer()
             
@@ -49,7 +51,6 @@ struct ContentView: View {
                         if audioPlayer != nil && audioPlayer.isPlaying {
                             audioPlayer.stop()
                         }
-                        
                     }
                 
                 Spacer()
@@ -77,6 +78,7 @@ struct ContentView: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
+            .tint(.accentColor)
             .padding()
         }
         .padding()
